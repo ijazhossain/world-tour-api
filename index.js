@@ -33,14 +33,20 @@ function searchLanguage(lang) {
         .then(res => res.json())
         .then(data => showCountries(data))
 }
+searchLanguage('bengali');
 function showCountries(countries) {
     const countriesContainer = document.getElementById('countries-container');
+    const countriesContainer2 = document.getElementById('cards-container');
+    countriesContainer.style.display = 'flex';
+    countriesContainer2.style.display = 'none';
+
     countriesContainer.textContent = '';
     countries.forEach(country => {
         const languages = country.languages;
         const countryDiv = document.createElement('div');
+        countryDiv.classList.add('col');
         countryDiv.innerHTML = `
-        <div class="col">
+       
             <div class="card">
                 <img src="${country.flags.png}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -48,7 +54,7 @@ function showCountries(countries) {
                     <p class="card-text">Languages: ${Object.values(languages)}</p>
                 </div>
             </div>
-        </div>
+        
         `;
         countriesContainer.appendChild(countryDiv);
     })
@@ -65,14 +71,19 @@ function searchRegion(region) {
 }
 
 function displayCountries(countries) {
-    const countriesContainer = document.getElementById('cards-container');
-    countriesContainer.textContent = '';
+    const countriesContainer2 = document.getElementById('cards-container');
+    const countriesContainer = document.getElementById('countries-container');
+    countriesContainer.style.display = 'none';
+    countriesContainer2.style.display = 'flex';
+
+    countriesContainer2.textContent = '';
     countries.forEach(country => {
         // console.log(country);
         const languages = country.languages;
         const countryDiv = document.createElement('div');
+        countryDiv.classList.add('col');
         countryDiv.innerHTML = `
-        <div class="col">
+        
             <div class="card">
                 <img src="${country.flags.png}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -80,8 +91,8 @@ function displayCountries(countries) {
                     <p class="card-text">Languages: ${Object.values(languages)}</p>
                 </div>
             </div>
-        </div>
+       
     `;
-        countriesContainer.appendChild(countryDiv);
+        countriesContainer2.appendChild(countryDiv);
     });
 }
